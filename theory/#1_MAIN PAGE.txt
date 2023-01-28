@@ -1,0 +1,629 @@
+
+#1_MAIN PAGE
+
+#1.1 페이지 레이아웃
+
+학습 목표
+- Page Layout 구상
+- index.html 코딩
+
+세 가지 섹션으로 나눠서 아래 코드를 활용하여 한 페이지에 전부 구현할 생각
+
+
+#1.2 부트스트랩
+
+학습 목표
+- Bootstrap
+- Bootstrap Grid System
+
+웹사이트를 디자인할 때 (PC / Mobile)에서 보이는 화면 모두를 고려해야 함 ⇒ 반응형 웹사이트
+  - PC를 위한 UI / Mobile을 위한 UI = 가장 *best
+
+
+부트스트랩이라는 프레임워크를 통해
+이미 만들어진 코드(=반응형 웹사이트를 만들기 위한 코드)를 사용해서 쉽게 만들 수 있음
+
+부트스트랩 사이트
+[https://getbootstrap.com/docs/5.3/getting-started/introduction/](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
+
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+⇒ 부트스트랩에서 정의한 css를 마음대로 사용할 수 있음
+   css를 적용하고 싶은 태그를 검색해서, class 이름을 추가하는 것만으로 css를 적용할 수 있음
+
+
+!! 반응형 웹사이트를 만들려면 부트스트랩에서 제공하는 그리드시스템을 알아야 함
+[https://getbootstrap.com/docs/5.3/layout/grid/#example](https://getbootstrap.com/docs/5.3/layout/grid/#example)
+
+
+웹페이지에 전체 UI를 12등분으로 나누어서 관리
+- `class=”col-1”`   : 1/12 (12분의 1)
+- `class=”col-2”`   : 2/12 (12분의 2)
+- `class=”col-3”`   : 3/12 (12분의 3)
+- `class=”col-4”`   : 4/12 (12분의 4)
+- `class=”col-5”`   : 5/12 (12분의 5)
+- `class=”col-6 ”`   : 6/12 (12분의 6)
+
+⇒ 그래서 화면을 늘리고 줄여도 항상 12분의 n으로 설정됨
+
+
+xs~xxl까지 사용자의 해상도에 따라 선택되는 크기를 지정할 수 있음
+
+  <div class="col-6 col-lg-12 col-md-8 col-sm-2"
+    style="background-color:red;">
+  </div>
+
+⇒ xs~xxl를 잘 활용하면 사용자가 어떤 해상도로 들어오든 맞춤 디자인을 제공할 수 있음
+
+
+#1.3 메인페이지 꾸미기
+
+학습 목표
+- Main page 꾸미기
+
+`#main`에 `width: 80%;`을 줬는데 오른쪽에 20%의 여백이 생겼으니
+이를 중앙에 맞도록 구현하려면 `#main`에 `class="mx-auto”`
+
+[https://getbootstrap.com/docs/5.2/utilities/spacing/#margin-and-padding](https://getbootstrap.com/docs/5.2/utilities/spacing/#margin-and-padding)
+
+
+이미지 때문에 늘어진 웹사이트를 맞추기 위해
+
+  <div class="col-6">
+            <img src="./img/main.png" class="img-fluid" alt="mainImage" />
+          </div>
+
+  <!-- 코드 해석
+  container 태그의 6/12이니까 절반이 항상 div에 적용
+  img에서는 img-fluid 속성으로 그 크기를 따라감 -->
+
+
+  <section id="main" class="mx-auto mt-5">
+
+위와 같이 작성할 경우, #main에 margin-top이 먹히지만
+
+
+  <h3 class="pt-5">십이간지로 알아보는 연애 유형</h3>
+
+는 먹히지 않는 이유가 `#main`에 `margin-top`이 48, `h3`에 `margin-top`이 48
+`margin`은 `#main`과 `h3`에 48이 더해지는 게 아니라 겹쳐짐
+
+
+  <h3 class="pt-5">십이간지로 알아보는 연애 유형</h3>
+
+때문에 h3 같은 경우에는 padding 값을 줘야 함
+
+
+  <section id="main" class="mx-auto mt-5 py-5">
+
+but 이게 더 깔끔함
+
+
+개발자도구 (모바일 버전)를 확인하면, pc에서 보이는 그대로 적용된 것을 확인할 수 있음
+
+이를 조정하기 위해 메타 태그를 만들어주자
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+pc에서의 이미지 크기는 적당하지만 모바일에서의 이미지 크기는 작게 느껴짐
+
+
+`img`를 감싸고 있는 `div`의 `col`값을 아래와 같이 변경
+
+  <div class="col-lg-6 col-md-8 col-sm-10 col-12 mx-auto">
+
+
+#1.4 화면 전환하기
+
+학습 목표
+- 화면 전환
+- 애니메이션 적용
+- setTimeout
+
+Javascript파일을 `HTML`에 `import`할 때는
+- head
+- body에 시작
+- body에 끝  *권장
+
+  <script src="./js/start.js" charset="utf-8"></script>
+
++) HTML 파일을 열었을 때, 위에서부터 아래로 읽게 되는데 Javascript 코드가 길수록
+   화면을 보여주기까지 사용자가 로딩을 겪으므로 `body`태그 끝부분에 `import`하는 것을 권장
+   (물론 지금은 토이 프로젝트라서 Javascript의 길이가 길지 않아 영향을 끼치지 않음)
+
+
+버튼을 눌렀을 때 `main`이 사라지고 `qna`가 보이게 하기 위해
+
+  <button type="button" class="btn btn-danger mt-3" onclick="js:begin()">
+
+
+서서히 사라지게끔 하기 위해
+
+  /* animation.css */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+    }
+  }
+
+  @-webkit-keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @-webkit-keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+    }
+  }
+
+  http://www.tcpschool.com/css/css3_transform_animation
+
+
+  // start.js
+  const main = document.querySelector('#main');
+  const qna = document.querySelector('#qna');
+
+  function begin() {
+    main.style.WebkitAnimation = 'fadeOut 0.8s';
+    main.style.animation = 'fadeOut 0.8s';
+
+    setTimeout(() => {
+      qna.style.WebkitAnimation = 'fadeIn 0.8s';
+      qna.style.animation = 'fadeIn 0.8s';
+      setTimeout(() => {
+        main.style.display = 'none';
+      }, 380);
+    }, 380);
+  }
+
+  https://developer.mozilla.org/ko/docs/Web/API/setTimeout
+
+
+`qna`의 `display`가 `none이기 때문에 보이지 않는데 이를 해결하기 위해
+
+  // start.js
+  const main = document.querySelector('#main');
+  const qna = document.querySelector('#qna');
+
+  function begin() {
+    main.style.WebkitAnimation = 'fadeOut 0.8s';
+    main.style.animation = 'fadeOut 0.8s';
+
+    setTimeout(() => {
+      qna.style.WebkitAnimation = 'fadeIn 0.8s';
+      qna.style.animation = 'fadeIn 0.8s';
+      setTimeout(() => {
+        main.style.display = 'none';
+        qna.style.display = 'block';
+      }, 380);
+    }, 380);
+  }
+
+
+학습 목표
+1. qna 구현
+    - innerHTML
+    - createElement
+2. 다음 질문으로 넘어가기
+    - addEventListener
+
+Q
+
+  // start.js
+  const main = document.querySelector('#main');
+  const qna = document.querySelector('#qna');
+
+  function goNext(qIdx) {
+    var q = document.querySelector('.qBox');
+    q.innerHTML = qnaList[qIdx].q;
+  }
+
+  function begin() {
+    main.style.WebkitAnimation = 'fadeOut 0.8s';
+    main.style.animation = 'fadeOut 0.8s';
+
+    setTimeout(() => {
+      qna.style.WebkitAnimation = 'fadeIn 0.8s';
+      qna.style.animation = 'fadeIn 0.8s';
+      setTimeout(() => {
+        main.style.display = 'none';
+        qna.style.display = 'block';
+      }, 380);
+      let qIdx = 0;
+      goNext(qIdx);
+    }, 380);
+  }
+
+  https://developer.mozilla.org/ko/docs/Web/API/Element/innerHTML
+
+
+`answer`라는 변수에 `button`을 만들고
+
+  // start.js
+  const main = document.querySelector('#main');
+  const qna = document.querySelector('#qna');
+
+  function addAnswer() {
+    var a = document.querySelector('.answerBox');
+    var answer = document.createElement('button');
+    a.appendChild(answer);
+  }
+
+  function goNext(qIdx) {
+    var q = document.querySelector('.qBox');
+    q.innerHTML = qnaList[qIdx].q;
+
+    for (let i in qnaList[qIdx].a) {
+      addAnswer();
+    }
+  }
+
+  function begin() {
+    main.style.WebkitAnimation = 'fadeOut 0.8s';
+    main.style.animation = 'fadeOut 0.8s';
+
+    setTimeout(() => {
+      qna.style.WebkitAnimation = 'fadeIn 0.8s';
+      qna.style.animation = 'fadeIn 0.8s';
+      setTimeout(() => {
+        main.style.display = 'none';
+        qna.style.display = 'block';
+      }, 380);
+      let qIdx = 0;
+      goNext(qIdx);
+    }, 380);
+  }
+
+  https://developer.mozilla.org/ko/docs/Web/API/Document/createElement
+
+
+`appendChild`라는 함수를 통해 `answer`라는 `button`이 `a`에게 소속될 수 있도록 관계를 맺음
+
+  <div>
+    <button></button>
+  </div>
+
+와 같음
+
+
+그럼 버튼이 세 개가 생성됨
+
+  // start.js
+  const main = document.querySelector('#main');
+  const qna = document.querySelector('#qna');
+
+  function addAnswer(answerText) {
+    var a = document.querySelector('.answerBox');
+    var answer = document.createElement('button');
+    a.appendChild(answer);
+    answer.innerHTML = answerText;
+  }
+
+  function goNext(qIdx) {
+    var q = document.querySelector('.qBox');
+    q.innerHTML = qnaList[qIdx].q;
+
+    for (let i in qnaList[qIdx].a) {
+      addAnswer(qnaList[qIdx].a[i].answer);
+    }
+  }
+
+  function begin() {
+    main.style.WebkitAnimation = 'fadeOut 0.8s';
+    main.style.animation = 'fadeOut 0.8s';
+
+    setTimeout(() => {
+      qna.style.WebkitAnimation = 'fadeIn 0.8s';
+      qna.style.animation = 'fadeIn 0.8s';
+      setTimeout(() => {
+        main.style.display = 'none';
+        qna.style.display = 'block';
+      }, 380);
+      let qIdx = 0;
+      goNext(qIdx);
+    }, 380);
+  }
+
+
+그럼 이제 사용자가 3개의 버튼 중 하나를 선택하여 골랐을 때
+현재 버튼은 비활성화가 되고, 다음 질문과 질문에 알맞은 버튼을 출력하려면
+
+  // start.js
+  const main = document.querySelector('#main');
+  const qna = document.querySelector('#qna');
+
+  function addAnswer(answerText, qIdx) {
+    var a = document.querySelector('.answerBox');
+    var answer = document.createElement('button');
+    answer.classList.add('answerList');
+    a.appendChild(answer);
+    answer.innerHTML = answerText;
+
+    answer.addEventListener(
+      'click',
+      function () {
+        var children = document.querySelectorAll('.answerList');
+        for (let i = 0; i < children.length; i++) {
+          children[i].disabled = true;
+          children[i].style.display = 'none';
+        }
+        goNext(++qIdx);
+      },
+      false,
+    );
+  }
+
+  function goNext(qIdx) {
+    var q = document.querySelector('.qBox');
+    q.innerHTML = qnaList[qIdx].q;
+
+    for (let i in qnaList[qIdx].a) {
+      addAnswer(qnaList[qIdx].a[i].answer, qIdx);
+    }
+  }
+
+  function begin() {
+    main.style.WebkitAnimation = 'fadeOut 0.8s';
+    main.style.animation = 'fadeOut 0.8s';
+
+    setTimeout(() => {
+      qna.style.WebkitAnimation = 'fadeIn 0.8s';
+      qna.style.animation = 'fadeIn 0.8s';
+      setTimeout(() => {
+        main.style.display = 'none';
+        qna.style.display = 'block';
+      }, 380);
+      let qIdx = 0;
+      goNext(qIdx);
+    }, 380);
+  }
+
+  https://developer.mozilla.org/ko/docs/Web/API/EventTarget/addEventListener
+
+
+#1.6 qna 꾸미기
+
+학습 목표
+- QnA 꾸미기
+- 버튼 클릭 시 애니메이션 넣기
+
+  /* animation.css */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+    }
+  }
+
+  @-webkit-keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @-webkit-keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+    }
+  }
+
+  .fadeIn {
+    animation: fadeIn;
+    animation-duration: 0.5s;
+  }
+
+  .fadeOut {
+    animation: fadeOut;
+    animation-duration: 0.5s;
+  }
+
+
+  // start.js
+  const main = document.querySelector('#main');
+  const qna = document.querySelector('#qna');
+
+  function addAnswer(answerText, qIdx) {
+    var a = document.querySelector('.answerBox');
+    var answer = document.createElement('button');
+    answer.classList.add('answerList');
+    answer.classList.add('my-3');
+    answer.classList.add('py-5');
+    answer.classList.add('mx-auto');
+    answer.classList.add('fadeIn');
+    a.appendChild(answer);
+    answer.innerHTML = answerText;
+
+    answer.addEventListener(
+      'click',
+      function () {
+        var children = document.querySelectorAll('.answerList');
+        for (let i = 0; i < children.length; i++) {
+          children[i].disabled = true;
+          children[i].style.WebkitAnimation = 'fadeOut 0.5s';
+          children[i].style.animation = 'fadeOut 0.5s';
+        }
+        setTimeout(() => {
+          for (let i = 0; i < children.length; i++) {
+            children[i].style.display = 'none';
+          }
+          goNext(++qIdx);
+        }, 50);
+      },
+      false,
+    );
+  }
+
+  function goNext(qIdx) {
+    var q = document.querySelector('.qBox');
+    q.innerHTML = qnaList[qIdx].q;
+
+    for (let i in qnaList[qIdx].a) {
+      addAnswer(qnaList[qIdx].a[i].answer, qIdx);
+    }
+  }
+
+  function begin() {
+    main.style.WebkitAnimation = 'fadeOut 0.8s';
+    main.style.animation = 'fadeOut 0.8s';
+
+    setTimeout(() => {
+      qna.style.WebkitAnimation = 'fadeIn 0.8s';
+      qna.style.animation = 'fadeIn 0.8s';
+      setTimeout(() => {
+        main.style.display = 'none';
+        qna.style.display = 'block';
+      }, 380);
+      let qIdx = 0;
+      goNext(qIdx);
+    }, 380);
+  }
+
+
+#1.7 진행 상태바 구현하기
+
+학습 목표
+- 진행 상태바 구현
+
+  <!-- index.html -->
+  <section id="qna">
+          <div class="status mx-auto mt-5">
+            <div class="statusBar"></div>
+          </div>
+          <div class="qBox my-5 py-5 mx-auto"></div>
+          <div class="answerBox"></div>
+        </section>
+
+
+  // start.js
+  const main = document.querySelector('#main');
+  const qna = document.querySelector('#qna');
+  const endPoint = 12;
+
+  function addAnswer(answerText, qIdx) {
+    var a = document.querySelector('.answerBox');
+    var answer = document.createElement('button');
+    answer.classList.add('answerList');
+    answer.classList.add('my-3');
+    answer.classList.add('py-5');
+    answer.classList.add('mx-auto');
+    answer.classList.add('fadeIn');
+    a.appendChild(answer);
+    answer.innerHTML = answerText;
+
+    answer.addEventListener(
+      'click',
+      function () {
+        var children = document.querySelectorAll('.answerList');
+        for (let i = 0; i < children.length; i++) {
+          children[i].disabled = true;
+          children[i].style.WebkitAnimation = 'fadeOut 0.5s';
+          children[i].style.animation = 'fadeOut 0.5s';
+        }
+        setTimeout(() => {
+          for (let i = 0; i < children.length; i++) {
+            children[i].style.display = 'none';
+          }
+          goNext(++qIdx);
+        }, 50);
+      },
+      false,
+    );
+  }
+
+  function goNext(qIdx) {
+    var q = document.querySelector('.qBox');
+    q.innerHTML = qnaList[qIdx].q;
+
+    for (let i in qnaList[qIdx].a) {
+      addAnswer(qnaList[qIdx].a[i].answer, qIdx);
+    }
+    var status = document.querySelector('.statusBar');
+    status.style.width = (100 / endPoint) * (qIdx + 1) + '%';
+  }
+
+  function begin() {
+    main.style.WebkitAnimation = 'fadeOut 0.8s';
+    main.style.animation = 'fadeOut 0.8s';
+
+    setTimeout(() => {
+      qna.style.WebkitAnimation = 'fadeIn 0.8s';
+      qna.style.animation = 'fadeIn 0.8s';
+      setTimeout(() => {
+        main.style.display = 'none';
+        qna.style.display = 'block';
+      }, 380);
+      let qIdx = 0;
+      goNext(qIdx);
+    }, 380);
+  }
+
+
+  /* qna.css */
+  .status {
+    height: 20px;
+    width: 80%;
+    background-color: #bbacca;
+    border-radius: 20px;
+  }
+
+  .statusBar {
+    height: 100%;
+    background-color: #a98aa7;
+    border-radius: 20px;
+  }
+
+
+`statusBar`에 그라데이션 효과
+[https://www.colorzilla.com/gradient-editor/](https://www.colorzilla.com/gradient-editor/)
+
+
+#1.8 Result 구현하기 (1)
+
+학습 목표
+- Result 구현 (1)
