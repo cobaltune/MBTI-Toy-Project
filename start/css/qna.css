@@ -5,7 +5,7 @@
 .qBox {
   background-color: white;
   text-align: center;
-  border-radius: 25px;
+  border-radius: 20px;
   font-size: 24px;
   font-weight: bold;
   width: 80%;
@@ -13,7 +13,7 @@
 
 .answerList {
   background-color: white;
-  border-radius: 25px;
+  border-radius: 20px;
   display: block;
   width: 80%;
   border: 0;
@@ -22,6 +22,41 @@
 
 .answerList:hover,
 .answerList:focus {
-  background-color: #c13e56;
+  background-color: #657220;
   color: white;
+}
+
+.status {
+  height: 20px;
+  width: 80%;
+  background-color: #ffffdd;
+  border-radius: 20px;
+}
+
+.statusBar {
+  height: 100%;
+  border-radius: 20px; /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#e6f0a3+0,d2e638+50,c3d825+51,dbf043+100;Green+Gloss+%232 */
+  background: #e6f0a3; /* Old browsers */
+  background: -moz-linear-gradient(
+    top,
+    #e6f0a3 0%,
+    #d2e638 50%,
+    #c3d825 51%,
+    #dbf043 100%
+  ); /* FF3.6-15 */
+  background: -webkit-linear-gradient(
+    top,
+    #e6f0a3 0%,
+    #d2e638 50%,
+    #c3d825 51%,
+    #dbf043 100%
+  ); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #e6f0a3 0%,
+    #d2e638 50%,
+    #c3d825 51%,
+    #dbf043 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6f0a3', endColorstr='#dbf043',GradientType=0 ); /* IE6-9 */
 }
