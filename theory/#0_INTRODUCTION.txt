@@ -1,0 +1,33 @@
+
+#0_INTRODUCTION
+
+youtube 판다코딩_클론 코딩 (#HTML  #Javascript  #CSS)
+: MBTI 프로젝트의 코딩 및 배포까지를 담은 토이프로젝트형 강의
+
+십이간지로 알아보는 연애 유형
+- 질문 (12가지) / 대답 (3가지)
+- 결과 (이미지 & 텍스트)
+- 카카오톡 공유 버튼
+
+참고 사이트 : 나를 알아보는 10가지 질문
+[https://dev-dain.github.io/10-things-test/](https://dev-dain.github.io/10-things-test/)
+
++) 이번 프로젝트에서 다루지 않는 다양한 기능들이 추가되어 있으니
+이 사이트도 참고로 확인
+
+
+폴더 구조
+1. main page
+2. QnA page
+3. result page
+4. share page
+5. start
+    a. img
+    b. js
+    c. index.html
+
+*에러가 발생할 경우
+Github > 올라간 섹션 안에 (강의 시점에 맞춘) 코드 참고
+[https://github.com/nani6765/MyMBTI](https://github.com/nani6765/MyMBTI)
+
+구글 애널리틱스를 통해 반응(?)을 확인할 수 있음
