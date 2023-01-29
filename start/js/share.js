@@ -18,13 +18,6 @@ function sendLink() {
           webUrl: 'https://twelve-test.netlify.app',
         },
       },
-      {
-        title: '앱으로 보기', //두 번째 버튼
-        link: {
-          mobileWebUrl: 'https://twelve-test.netlify.app',
-          webUrl: 'https://twelve-test.netlify.app',
-        },
-      },
     ],
   });
 }
