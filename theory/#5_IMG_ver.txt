@@ -1,0 +1,9 @@
+
+#5.1 사용자 응답 사진으로 구현하기
+
+학습 목표
+Q. Q&A에 글 질문이 아닌 화면에 중앙에서 나뉘어 좌우 큰 이미지 2개 중 선택하게 하려면 어떻게 해야 할까요 ?
+
+[https://github.com/cobaltune/MyMBTI/tree/main/%235. Img Version](https://github.com/cobaltune/MyMBTI/tree/main/%235.%20Img%20Version)
+
+⇒ 이거로는 이상형 월드컵 만들면 되겠다 ㅎㅎ
