@@ -1,21 +1,31 @@
-function sendLink() {
+const url = 'https://twelve-test.netlify.app';
+
+function setShare() {
+  var resultImg = document.querySelector('#resultImg');
+  var resultAlt = resultImg.firstElementChild.alt;
+  const shareTitle = '십이간지 연애유형 결과';
+  const shareDes = infoList[resultAlt].name;
+  const shareImage = url + 'img/image-' + resultAlt + '.png';
+  const shareURL = url + 'page/result-' + resultAlt + '.html';
+
   Kakao.Link.sendDefault({
     objectType: 'feed',
     content: {
-      title: '십이간지 연애 유형',
-      description: '십이간지로 보는 연애 유형',
-      imageUrl: '../img/share.png',
+      title: shareTitle,
+      description: shareDes,
+      imageUrl: shareImage,
       link: {
-        mobileWebUrl: 'https://twelve-test.netlify.app',
-        webUrl: 'https://twelve-test.netlify.app',
+        mobileWebUrl: shareURL,
+        webUrl: shareURL,
       },
     },
+
     buttons: [
       {
-        title: '자세히 보기', //첫 번째 버튼
+        title: '결과 확인하기',
         link: {
-          mobileWebUrl: 'https://twelve-test.netlify.app', //버튼 클릭 시 이동 링크
-          webUrl: 'https://twelve-test.netlify.app',
+          mobileWebUrl: shareURL,
+          webUrl: shareURL,
         },
       },
     ],
