@@ -12,7 +12,7 @@ function sendLink() {
     },
     buttons: [
       {
-        title: '웹으로 보기', //첫 번째 버튼
+        title: '자세히 보기', //첫 번째 버튼
         link: {
           mobileWebUrl: 'https://twelve-test.netlify.app', //버튼 클릭 시 이동 링크
           webUrl: 'https://twelve-test.netlify.app',
