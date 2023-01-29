@@ -1,0 +1,399 @@
+
+#2.1 qna 구현하기
+
+학습 목표
+1. qna 구현
+    - innerHTML
+    - createElement
+2. 다음 질문으로 넘어가기
+    - addEventListener
+
+Q
+
+  // start.js
+  const main = document.querySelector('#main');
+  const qna = document.querySelector('#qna');
+
+  function goNext(qIdx) {
+    var q = document.querySelector('.qBox');
+    q.innerHTML = qnaList[qIdx].q;
+  }
+
+  function begin() {
+    main.style.WebkitAnimation = 'fadeOut 0.8s';
+    main.style.animation = 'fadeOut 0.8s';
+
+    setTimeout(() => {
+      qna.style.WebkitAnimation = 'fadeIn 0.8s';
+      qna.style.animation = 'fadeIn 0.8s';
+      setTimeout(() => {
+        main.style.display = 'none';
+        qna.style.display = 'block';
+      }, 380);
+      let qIdx = 0;
+      goNext(qIdx);
+    }, 380);
+  }
+
+  https://developer.mozilla.org/ko/docs/Web/API/Element/innerHTML
+
+
+`answer`라는 변수에 `button`을 만들고
+
+  // start.js
+  const main = document.querySelector('#main');
+  const qna = document.querySelector('#qna');
+
+  function addAnswer() {
+    var a = document.querySelector('.answerBox');
+    var answer = document.createElement('button');
+    a.appendChild(answer);
+  }
+
+  function goNext(qIdx) {
+    var q = document.querySelector('.qBox');
+    q.innerHTML = qnaList[qIdx].q;
+
+    for (let i in qnaList[qIdx].a) {
+      addAnswer();
+    }
+  }
+
+  function begin() {
+    main.style.WebkitAnimation = 'fadeOut 0.8s';
+    main.style.animation = 'fadeOut 0.8s';
+
+    setTimeout(() => {
+      qna.style.WebkitAnimation = 'fadeIn 0.8s';
+      qna.style.animation = 'fadeIn 0.8s';
+      setTimeout(() => {
+        main.style.display = 'none';
+        qna.style.display = 'block';
+      }, 380);
+      let qIdx = 0;
+      goNext(qIdx);
+    }, 380);
+  }
+
+  https://developer.mozilla.org/ko/docs/Web/API/Document/createElement
+
+
+`appendChild`라는 함수를 통해 `answer`라는 `button`이 `a`에게 소속될 수 있도록 관계를 맺음
+
+  <div>
+    <button></button>
+  </div>
+
+와 같음
+
+
+그럼 버튼이 세 개가 생성됨
+
+  // start.js
+  const main = document.querySelector('#main');
+  const qna = document.querySelector('#qna');
+
+  function addAnswer(answerText) {
+    var a = document.querySelector('.answerBox');
+    var answer = document.createElement('button');
+    a.appendChild(answer);
+    answer.innerHTML = answerText;
+  }
+
+  function goNext(qIdx) {
+    var q = document.querySelector('.qBox');
+    q.innerHTML = qnaList[qIdx].q;
+
+    for (let i in qnaList[qIdx].a) {
+      addAnswer(qnaList[qIdx].a[i].answer);
+    }
+  }
+
+  function begin() {
+    main.style.WebkitAnimation = 'fadeOut 0.8s';
+    main.style.animation = 'fadeOut 0.8s';
+
+    setTimeout(() => {
+      qna.style.WebkitAnimation = 'fadeIn 0.8s';
+      qna.style.animation = 'fadeIn 0.8s';
+      setTimeout(() => {
+        main.style.display = 'none';
+        qna.style.display = 'block';
+      }, 380);
+      let qIdx = 0;
+      goNext(qIdx);
+    }, 380);
+  }
+
+
+그럼 이제 사용자가 3개의 버튼 중 하나를 선택하여 골랐을 때
+현재 버튼은 비활성화가 되고, 다음 질문과 질문에 알맞은 버튼을 출력하려면
+
+  // start.js
+  const main = document.querySelector('#main');
+  const qna = document.querySelector('#qna');
+
+  function addAnswer(answerText, qIdx) {
+    var a = document.querySelector('.answerBox');
+    var answer = document.createElement('button');
+    answer.classList.add('answerList');
+    a.appendChild(answer);
+    answer.innerHTML = answerText;
+
+    answer.addEventListener(
+      'click',
+      function () {
+        var children = document.querySelectorAll('.answerList');
+        for (let i = 0; i < children.length; i++) {
+          children[i].disabled = true;
+          children[i].style.display = 'none';
+        }
+        goNext(++qIdx);
+      },
+      false,
+    );
+  }
+
+  function goNext(qIdx) {
+    var q = document.querySelector('.qBox');
+    q.innerHTML = qnaList[qIdx].q;
+
+    for (let i in qnaList[qIdx].a) {
+      addAnswer(qnaList[qIdx].a[i].answer, qIdx);
+    }
+  }
+
+  function begin() {
+    main.style.WebkitAnimation = 'fadeOut 0.8s';
+    main.style.animation = 'fadeOut 0.8s';
+
+    setTimeout(() => {
+      qna.style.WebkitAnimation = 'fadeIn 0.8s';
+      qna.style.animation = 'fadeIn 0.8s';
+      setTimeout(() => {
+        main.style.display = 'none';
+        qna.style.display = 'block';
+      }, 380);
+      let qIdx = 0;
+      goNext(qIdx);
+    }, 380);
+  }
+
+  https://developer.mozilla.org/ko/docs/Web/API/EventTarget/addEventListener
+
+
+#2.2 qna 꾸미기
+
+학습 목표
+- QnA 꾸미기
+- 버튼 클릭 시 애니메이션 넣기
+
+  /* animation.css */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+    }
+  }
+
+  @-webkit-keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @-webkit-keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+    }
+  }
+
+  .fadeIn {
+    animation: fadeIn;
+    animation-duration: 0.5s;
+  }
+
+  .fadeOut {
+    animation: fadeOut;
+    animation-duration: 0.5s;
+  }
+
+
+  // start.js
+  const main = document.querySelector('#main');
+  const qna = document.querySelector('#qna');
+
+  function addAnswer(answerText, qIdx) {
+    var a = document.querySelector('.answerBox');
+    var answer = document.createElement('button');
+    answer.classList.add('answerList');
+    answer.classList.add('my-3');
+    answer.classList.add('py-5');
+    answer.classList.add('mx-auto');
+    answer.classList.add('fadeIn');
+    a.appendChild(answer);
+    answer.innerHTML = answerText;
+
+    answer.addEventListener(
+      'click',
+      function () {
+        var children = document.querySelectorAll('.answerList');
+        for (let i = 0; i < children.length; i++) {
+          children[i].disabled = true;
+          children[i].style.WebkitAnimation = 'fadeOut 0.5s';
+          children[i].style.animation = 'fadeOut 0.5s';
+        }
+        setTimeout(() => {
+          for (let i = 0; i < children.length; i++) {
+            children[i].style.display = 'none';
+          }
+          goNext(++qIdx);
+        }, 50);
+      },
+      false,
+    );
+  }
+
+  function goNext(qIdx) {
+    var q = document.querySelector('.qBox');
+    q.innerHTML = qnaList[qIdx].q;
+
+    for (let i in qnaList[qIdx].a) {
+      addAnswer(qnaList[qIdx].a[i].answer, qIdx);
+    }
+  }
+
+  function begin() {
+    main.style.WebkitAnimation = 'fadeOut 0.8s';
+    main.style.animation = 'fadeOut 0.8s';
+
+    setTimeout(() => {
+      qna.style.WebkitAnimation = 'fadeIn 0.8s';
+      qna.style.animation = 'fadeIn 0.8s';
+      setTimeout(() => {
+        main.style.display = 'none';
+        qna.style.display = 'block';
+      }, 380);
+      let qIdx = 0;
+      goNext(qIdx);
+    }, 380);
+  }
+
+
+#2.3 진행 상태바 구현하기
+
+학습 목표
+- 진행 상태바 구현
+
+  <!-- index.html -->
+  <section id="qna">
+          <div class="status mx-auto mt-5">
+            <div class="statusBar"></div>
+          </div>
+          <div class="qBox my-5 py-5 mx-auto"></div>
+          <div class="answerBox"></div>
+        </section>
+
+
+  // start.js
+  const main = document.querySelector('#main');
+  const qna = document.querySelector('#qna');
+  const endPoint = 12;
+
+  function addAnswer(answerText, qIdx) {
+    var a = document.querySelector('.answerBox');
+    var answer = document.createElement('button');
+    answer.classList.add('answerList');
+    answer.classList.add('my-3');
+    answer.classList.add('py-5');
+    answer.classList.add('mx-auto');
+    answer.classList.add('fadeIn');
+    a.appendChild(answer);
+    answer.innerHTML = answerText;
+
+    answer.addEventListener(
+      'click',
+      function () {
+        var children = document.querySelectorAll('.answerList');
+        for (let i = 0; i < children.length; i++) {
+          children[i].disabled = true;
+          children[i].style.WebkitAnimation = 'fadeOut 0.5s';
+          children[i].style.animation = 'fadeOut 0.5s';
+        }
+        setTimeout(() => {
+          for (let i = 0; i < children.length; i++) {
+            children[i].style.display = 'none';
+          }
+          goNext(++qIdx);
+        }, 50);
+      },
+      false,
+    );
+  }
+
+  function goNext(qIdx) {
+    var q = document.querySelector('.qBox');
+    q.innerHTML = qnaList[qIdx].q;
+
+    for (let i in qnaList[qIdx].a) {
+      addAnswer(qnaList[qIdx].a[i].answer, qIdx);
+    }
+    var status = document.querySelector('.statusBar');
+    status.style.width = (100 / endPoint) * (qIdx + 1) + '%';
+  }
+
+  function begin() {
+    main.style.WebkitAnimation = 'fadeOut 0.8s';
+    main.style.animation = 'fadeOut 0.8s';
+
+    setTimeout(() => {
+      qna.style.WebkitAnimation = 'fadeIn 0.8s';
+      qna.style.animation = 'fadeIn 0.8s';
+      setTimeout(() => {
+        main.style.display = 'none';
+        qna.style.display = 'block';
+      }, 380);
+      let qIdx = 0;
+      goNext(qIdx);
+    }, 380);
+  }
+
+
+  /* qna.css */
+  .status {
+    height: 20px;
+    width: 80%;
+    background-color: #bbacca;
+    border-radius: 20px;
+  }
+
+  .statusBar {
+    height: 100%;
+    background-color: #a98aa7;
+    border-radius: 20px;
+  }
+
+
+`statusBar`에 그라데이션 효과
+[https://www.colorzilla.com/gradient-editor/](https://www.colorzilla.com/gradient-editor/)
