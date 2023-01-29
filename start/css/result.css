@@ -26,4 +26,5 @@
 .kakao:focus {
   background-color: white;
   color: #fee500;
+  border: 1px solid #fee500;
 }
