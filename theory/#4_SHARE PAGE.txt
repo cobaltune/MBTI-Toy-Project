@@ -1,0 +1,52 @@
+
+#4.1 Netlify로 배포하기
+
+학습 목표
+- Meta 태그 수정
+- Netlify로 배포
+
+부실한 메타태그 채워넣고
+
+  <meta name="author" content="PandaCoding_clone coding" />
+  <meta name="keywords" content="십이간지 연애 유형" />
+  <meta name="description" content="십이간지 연애 유형" />
+
+
+카카오톡 공유를 하면 이미지와 웹사이트의 간단한 설명이 등장하는 부분도 작성
+
+  <!-- sns share -->
+  <meta property="og:url" content="https://twelvelovetype.netlify.app" />
+  <meta property="og:title" content="십이간지 연애유형" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="img/share.png" />
+  <meta property="og:description" content="십이간지로 알아보는 연애유형" />
+
+
+favicon = 웹사이트의 아이콘
+[https://icon-icons.com/ko/](https://icon-icons.com/ko/)
+
+*다운로드 받기 전, 면허 먼저 확인하고 ICO파일로 다운로드
+
+  <!-- favicon -->
+  <link rel="shortcut icon" href="img/favicon.ico" />
+  <link rel="apple-touch-icon-precomposed" href="img/favicon.ico" />
+  <!-- 애플 기기를 위해서 -->
+
+
+깃허브로 로그인
+[https://app.netlify.com/teams/cobaltune/sites](https://app.netlify.com/teams/cobaltune/sites)
+
+폴더 드롭해서 > sites > 도메인 설정 > 네이밍 > 복사
+
+  <!-- sns share -->
+      <meta
+        property="og:url"
+        content="https://twelve-love-type-test.netlify.app"
+      />
+      <meta property="og:title" content="십이간지 연애유형" />
+      <meta property="og:type" content="website" />
+      <meta property="og:image" content="img/share.png" />
+      <meta property="og:description" content="십이간지로 알아보는 연애유형" />
+
+배포한 시점 이후로 수정된 내용을 반영하고 싶으면
+deploy > 다시 드래그 앤 드롭 > 그럼 수정된 내용으로 사이트가 바뀜
