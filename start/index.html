@@ -42,8 +42,10 @@
       integrity="sha384-dpu02ieKC6NUeKFoGMOKz6102CLEWi9+5RQjWSV0ikYSFFd8M3Wp2reIcquJOemx"
       crossorigin="anonymous"
     ></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script>
-      Kakao.init('8f30b8bd20d9454d231b8657bb3b65b9'); // 사용하려는 앱의 JavaScript 키 입력
+      Kakao.init('8f30b8bd20d9454d231b8657bb3b65b9');
+      console.log(Kakao.isInitialized());
     </script>
   </head>
   <body>
@@ -82,7 +84,7 @@
         <button
           type="button"
           class="kakao mt-3 py-2 px-3"
-          onclick="js:kakaoShare()"
+          onclick="js:sendLink()"
         >
           공유하기
         </button>
