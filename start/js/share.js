@@ -9,7 +9,8 @@ function kakaoShare() {
         'http://k.kakaocdn.net/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
       link: {
         // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
-        webUrl: 'https://twelve-test.netlify.app/',
+        mobileWebUrl: 'https://twelve-test.netlify.app',
+        webUrl: 'https://twelve-test.netlify.app',
       },
     },
     social: {
