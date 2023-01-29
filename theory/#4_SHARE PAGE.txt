@@ -59,3 +59,428 @@ deploy > 다시 드래그 앤 드롭 > 그럼 수정된 내용으로 사이트�
 [https://dev.to/rajeshroyal/page-not-found-error-on-netlify-reactjs-react-router-solved-43oa](https://dev.to/rajeshroyal/page-not-found-error-on-netlify-reactjs-react-router-solved-43oa)
 
 
++) 업데이트할 때마다 드래그 앤 드롭하기 귀찮으니 깃허브랑 연동해서
+   깃허브에 푸쉬 할 때마다 자동으로 업데이트되게끔 할 수 있음 (난 안 했음)
+
+
+#4.2 카카오톡 공유 기능 추가하기
+
+학습 목표
+- 결과 페이지 만들기
+- 카카오톡 공유 구현
+
+(지금은 환경이 바뀌어서 캡쳐로 -> notion 참고)
+https://developers.kakao.com/docs/latest/ko/message/common
+
+https://developers.kakao.com/docs/latest/ko/message/js-link#default-template-msg
+
+
+sample 코드 복붙
+
+  // share.js
+  Kakao.Share.createDefaultButton({
+    container: '#kakaotalk-sharing-btn',
+    objectType: 'feed',
+    content: {
+      title: '오늘의 디저트',
+      description: '아메리카노, 빵, 케익',
+      imageUrl:
+        'https://mud-kage.kakao.com/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg',
+      link: {
+        mobileWebUrl: 'https://developers.kakao.com',
+        webUrl: 'https://developers.kakao.com',
+      },
+    },
+    itemContent: {
+      profileText: 'Kakao',
+      profileImageUrl:
+        'https://mud-kage.kakao.com/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+      titleImageUrl:
+        'https://mud-kage.kakao.com/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+      titleImageText: 'Cheese cake',
+      titleImageCategory: 'Cake',
+      items: [
+        {
+          item: 'Cake1',
+          itemOp: '1000원',
+        },
+        {
+          item: 'Cake2',
+          itemOp: '2000원',
+        },
+        {
+          item: 'Cake3',
+          itemOp: '3000원',
+        },
+        {
+          item: 'Cake4',
+          itemOp: '4000원',
+        },
+        {
+          item: 'Cake5',
+          itemOp: '5000원',
+        },
+      ],
+      sum: 'Total',
+      sumOp: '15000원',
+    },
+    social: {
+      likeCount: 10,
+      commentCount: 20,
+      sharedCount: 30,
+    },
+    buttons: [
+      {
+        title: '웹으로 이동',
+        link: {
+          mobileWebUrl: 'https://developers.kakao.com',
+          webUrl: 'https://developers.kakao.com',
+        },
+      },
+      {
+        title: '앱으로 이동',
+        link: {
+          mobileWebUrl: 'https://developers.kakao.com',
+          webUrl: 'https://developers.kakao.com',
+        },
+      },
+    ],
+  });
+
+
+시작하기 > Javascript > JS SDK 데모
+
+  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
+
+초기화
+
+  <script>
+      Kakao.init(JavaScript Key);
+      Kakao.isInitialized();
+    </script>
+
+
+내 애플리케이션 > JavaScript 키 복사 > 'JavaScript Key'
+
+위 (JavaScript Key)부분에다가 복사한 키 넣어주기
+
+  <script>
+        Kakao.init('JavaScript Key');
+        Kakao.isInitialized();
+      </script>
+
+
+[ index.html ]에 [ share.js ] import
+
+
+sample 코드 function안에 감싸주기
+
+  // share.js
+  function kakaoShare() {
+    Kakao.Share.createDefaultButton({
+      container: '#kakaotalk-sharing-btn',
+      objectType: 'feed',
+      content: {
+        title: '오늘의 디저트',
+        description: '아메리카노, 빵, 케익',
+        imageUrl:
+          'https://mud-kage.kakao.com/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg',
+        link: {
+          mobileWebUrl: 'https://developers.kakao.com',
+          webUrl: 'https://developers.kakao.com',
+        },
+      },
+      itemContent: {
+        profileText: 'Kakao',
+        profileImageUrl:
+          'https://mud-kage.kakao.com/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+        titleImageUrl:
+          'https://mud-kage.kakao.com/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+        titleImageText: 'Cheese cake',
+        titleImageCategory: 'Cake',
+        items: [
+          {
+            item: 'Cake1',
+            itemOp: '1000원',
+          },
+          {
+            item: 'Cake2',
+            itemOp: '2000원',
+          },
+          {
+            item: 'Cake3',
+            itemOp: '3000원',
+          },
+          {
+            item: 'Cake4',
+            itemOp: '4000원',
+          },
+          {
+            item: 'Cake5',
+            itemOp: '5000원',
+          },
+        ],
+        sum: 'Total',
+        sumOp: '15000원',
+      },
+      social: {
+        likeCount: 10,
+        commentCount: 20,
+        sharedCount: 30,
+      },
+      buttons: [
+        {
+          title: '웹으로 이동',
+          link: {
+            mobileWebUrl: 'https://developers.kakao.com',
+            webUrl: 'https://developers.kakao.com',
+          },
+        },
+        {
+          title: '앱으로 이동',
+          link: {
+            mobileWebUrl: 'https://developers.kakao.com',
+            webUrl: 'https://developers.kakao.com',
+          },
+        },
+      ],
+    });
+  }
+
+
+!!! 문제
+공유하기를 눌러도 아무 화면이 나오지 않는다
+
+
+최신 데모버전으로 시도해보자
+
+  <!-- index.html -->
+  <!DOCTYPE html>
+  <html lang="ko">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+      <meta name="author" content="PandaCoding_clone coding" />
+      <meta name="keywords" content="십이간지 연애 유형" />
+      <meta name="description" content="십이간지 연애 유형" />
+
+      <!-- sns share -->
+      <meta property="og:url" content="https://twelve-test.netlify.app" />
+      <meta property="og:title" content="십이간지 연애유형" />
+      <meta property="og:type" content="website" />
+      <meta property="og:image" content="img/share.png" />
+      <meta property="og:description" content="십이간지로 알아보는 연애유형" />
+
+      <!--favicon-->
+      <link rel="shortcut icon" href="img/favicon.ico" />
+      <link rel="apple-touch-icon-precomposed" href="img/favicon.ico" />
+
+      <title>십이간지 연애 유형</title>
+      <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+        crossorigin="anonymous"
+      />
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700;900&display=swap"
+        rel="stylesheet"
+      />
+      <link rel="stylesheet" href="./css/default.css" />
+      <link rel="stylesheet" href="./css/main.css" />
+      <link rel="stylesheet" href="./css/qna.css" />
+      <link rel="stylesheet" href="./css/animation.css" />
+      <link rel="stylesheet" href="./css/result.css" />
+      <script
+        src="https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js"
+        integrity="sha384-dpu02ieKC6NUeKFoGMOKz6102CLEWi9+5RQjWSV0ikYSFFd8M3Wp2reIcquJOemx"
+        crossorigin="anonymous"
+      ></script>
+      <script>
+        Kakao.init('8f30b8bd20d9454d231b8657bb3b65b9'); // 사용하려는 앱의 JavaScript 키 입력
+      </script>
+    </head>
+    <body>
+      <div class="container">
+        <section id="main" class="mx-auto my-5 px-3 py-5">
+          <h3>십이간지로 알아보는 연애 유형</h3>
+          <div class="col-lg-6 col-md-8 col-sm-10 col-12 mx-auto">
+            <img src="./img/main.png" class="img-fluid" alt="mainImage" />
+          </div>
+          <p>버튼을 눌러 시작해주세요 !</p>
+          <button
+            type="button"
+            class="btn btn-outline-warning mt-3"
+            onclick="js:begin()"
+          >
+            시작하기
+          </button>
+        </section>
+
+        <section id="qna">
+          <div class="status mx-auto mt-5">
+            <div class="statusBar"></div>
+          </div>
+          <div class="qBox my-5 py-5 mx-auto"></div>
+          <div class="answerBox"></div>
+        </section>
+
+        <section id="result" class="mx-auto my-5 py-5 px-3">
+          <h1>당신의 결과는?!</h1>
+          <div class="resultname"></div>
+          <div
+            id="resultImg"
+            class="my-3 col-lg-6 col-md-8 col-sm-10 col-12 mx-auto"
+          ></div>
+          <div class="resultDesc"></div>
+          <button
+            type="button"
+            class="kakao mt-3 py-2 px-3"
+            onclick="js:kakaoShare()"
+          >
+            공유하기
+          </button>
+        </section>
+        <script src="./js/data.js" charset="utf-8"></script>
+        <script src="./js/start.js" charset="utf-8"></script>
+        <script src="./js/share.js" charset="utf-8"></script>
+      </div>
+    </body>
+  </html>
+
+
+  // share.js
+  function kakaoShare() {
+    Kakao.Share.createDefaultButton({
+      container: '.kakao',
+      objectType: 'feed',
+      content: {
+        title: '딸기 치즈 케익',
+        description: '#케익 #딸기 #삼평동 #카페 #분위기 #소개팅',
+        imageUrl:
+          'http://k.kakaocdn.net/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+        link: {
+          // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
+          mobileWebUrl: 'https://twelve-test.netlify.app',
+          webUrl: 'https://twelve-test.netlify.app',
+        },
+      },
+      social: {
+        likeCount: 286,
+        commentCount: 45,
+        sharedCount: 845,
+      },
+      buttons: [
+        {
+          title: '웹으로 보기',
+          link: {
+            mobileWebUrl: 'https://developers.kakao.com',
+            webUrl: 'https://developers.kakao.com',
+          },
+        },
+        {
+          title: '앱으로 보기',
+          link: {
+            mobileWebUrl: 'https://developers.kakao.com',
+            webUrl: 'https://developers.kakao.com',
+          },
+        },
+      ],
+    });
+  }
+
+[https://developers.kakao.com/tool/demo/message/kakaolink?default_template=feed](https://developers.kakao.com/tool/demo/message/kakaolink?default_template=feed)
+
+
+!!! 문제
+이것도 안된다 그럼 블로그 보고 따라해보자
+
+  <!-- head -->
+  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+      <script>
+        Kakao.init('8f30b8bd20d9454d231b8657bb3b65b9');
+        console.log(Kakao.isInitialized());
+      </script>
+
+  <!-- body -->
+  <section id="result" class="mx-auto my-5 py-5 px-3">
+          <h1>당신의 결과는?!</h1>
+          <div class="resultname"></div>
+          <div
+            id="resultImg"
+            class="my-3 col-lg-6 col-md-8 col-sm-10 col-12 mx-auto"
+          ></div>
+          <div class="resultDesc"></div>
+          <button
+            type="button"
+            class="kakao mt-3 py-2 px-3"
+            onclick="js:sendLink()"
+          >
+            공유하기
+          </button>
+        </section>
+
+
+  // share.js
+  function sendLink() {
+    Kakao.Link.sendDefault({
+      objectType: 'feed',
+      content: {
+        title: '십이간지 연애 유형',
+        description: '십이간지로 보는 연애 유형',
+        imageUrl: './img/share.png',
+        link: {
+          mobileWebUrl: 'https://twelve-test.netlify.app',
+          webUrl: 'https://twelve-test.netlify.app',
+        },
+      },
+      buttons: [
+        {
+          title: '웹으로 보기', //첫 번째 버튼
+          link: {
+            mobileWebUrl: 'https://twelve-test.netlify.app', //버튼 클릭 시 이동 링크
+            webUrl: 'https://twelve-test.netlify.app',
+          },
+        },
+        {
+          title: '앱으로 보기', //두 번째 버튼
+          link: {
+            mobileWebUrl: 'https://twelve-test.netlify.app',
+            webUrl: 'https://twelve-test.netlify.app',
+          },
+        },
+      ],
+    });
+  }
+
+[https://blog.naver.com/PostView.naver?blogId=jaeeun_98&logNo=222378195823&redirect=Dlog&widgetTypeCall=true&directAccess=false](https://blog.naver.com/PostView.naver?blogId=jaeeun_98&logNo=222378195823&redirect=Dlog&widgetTypeCall=true&directAccess=false)
+
+됐다 > <
+
+여기서 작성해줬으니 메타 태그는 지워도 될듯 ?
+⇒ 알고보니 얘는 링크 복붙하면 보이는거라 지우면 안된다
+
+
+채팅창에서 앱 아이콘이 안보이는 이유는
+내 애플리케이션에서 사진을 안넣어줬기 때문
+
+이제 잘된다 끝 !
+
+
+생각해보니 이걸 원한게 아니어서 일단 영상을 마저 보면 따라하기로 했다
+
+
+테스트 하는 메인페이지를 공유하는게 아니라, 결과 페이지를 공유하는 거니까
+조금 번거롭겠지만 결과 페이지에 해당하는 12개의 페이지를 만들어보자
+
+
+전체적으로 수정했지만
+
+!!! 문제
+- 공유된 채팅창에 결과 이미지가 안뜨고
+- 결과 확인하기를 눌렀을 때, 결과창이 아닌 홈화면이 뜬다
+- 결과창이 없으니 나도 참여하기 버튼도 없다 .. 왜일까 .. 뒤질라고 ..
