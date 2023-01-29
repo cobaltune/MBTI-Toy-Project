@@ -50,3 +50,12 @@ favicon = 웹사이트의 아이콘
 
 배포한 시점 이후로 수정된 내용을 반영하고 싶으면
 deploy > 다시 드래그 앤 드롭 > 그럼 수정된 내용으로 사이트가 바뀜
+
+!!! 문제
+- Page Not Found
+
+오류 해결
+[https://soso-cod3v.tistory.com/142](https://soso-cod3v.tistory.com/142)
+[https://dev.to/rajeshroyal/page-not-found-error-on-netlify-reactjs-react-router-solved-43oa](https://dev.to/rajeshroyal/page-not-found-error-on-netlify-reactjs-react-router-solved-43oa)
+
+
